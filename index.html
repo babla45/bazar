@@ -21,14 +21,23 @@
                 <button onclick="addProduct(this, 'below')">Add Below</button>
                 <button onclick="removeProduct(this)">Remove</button>
             </div>
-            <input type="text" class="description" placeholder="Product Description">
-            <input type="text" class="price" placeholder="Price (e.g. 12+2*3)" oninput="calculateTotal()">
+            <input type="text" class="description" autocomplete="off" placeholder="Product Description">
+            <span class="small-screen"></span>
+            <input type="text" class="price" autocomplete="off" placeholder="Price (e.g. 12+2*3)" oninput="calculateTotal()">
         </div>
     </div>
-
     
+    
+    <!--Total price and error message -->
     <div class="total">Total: $<span id="totalPrice">0.00</span></div>
     <div class="error" id="errorMessage"></div>
+    
+    <!-- Reset button -->
+    <div class="reset-button-container">
+        <button class="reset-button" onclick="resetForm()">Reset Calculator</button>
+    </div>
+
+
     
 
 </body>

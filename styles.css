@@ -93,3 +93,48 @@ body {
 #product-container {
     position: relative;
 }
+
+
+
+
+
+/* --reset button and its container-- */
+
+.reset-button-container {
+    text-align: center;
+}
+.reset-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(79, 4, 122);
+    border: 2px solid rgb(188, 154, 154);
+    border-radius: 5px;
+    box-shadow: 4px 4px 8px rgb(236, 82, 82);
+    cursor: pointer;
+}
+
+.reset-button:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+
+/* Media query for max width 480px */
+@media (max-width: 480px) {
+    body {
+        margin-left: 21px;
+    }
+
+    .product-box input[type="text"] {
+        width: 90%;
+    }
+    .small-screen{
+        display: inline-block;
+    }
+}
