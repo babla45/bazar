@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Price Calculator with Index and Styling</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+<body>
+
+    <div class="heading">
+        <h2>Hi!!! I am Babla, welcome to<br>my Product Price Calculator</h2><br>
+    </div>
+
+    <div id="product-container">
+        <div class="product-box">
+            <div class="index-number">1</div>
+            <div class="buttons">
+                <button onclick="addProduct(this, 'above')">Add Above</button>
+                <button onclick="addProduct(this, 'below')">Add Below</button>
+                <button onclick="removeProduct(this)">Remove</button>
+            </div>
+            <input type="text" class="description" placeholder="Product Description">
+            <input type="text" class="price" placeholder="Price (e.g. 12+2*3)" oninput="calculateTotal()">
+        </div>
+    </div>
+
+    
+    <div class="total">Total: $<span id="totalPrice">0.00</span></div>
+    <div class="error" id="errorMessage"></div>
+    
+
+</body>
+</html>
+

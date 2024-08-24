@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    max-width: 700px;
+    margin: auto;
+    background-color: #f8f9fa;
+}
+.heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: rgb(37, 8, 133);
+}
+.product-box {
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 15px;
+    position: relative;
+    background-color: #fff;
+    box-shadow: 0 4px 8px;
+
+}
+.index-number {
+    position: absolute;
+    top: 10px;
+    left: -40px;
+    background-color: rgb(79, 4, 122);
+    /* background-color: #0a06f3; */
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    box-shadow: 4px 4px 8px rgb(247, 20, 175);
+}
+.buttons {
+    margin-bottom: 10px;
+    text-align: right;
+}
+.buttons button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    background-color: rgb(79, 4, 122);
+    /* background-color: #007bff; */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.buttons button:hover {
+    background-color: #0056b3;
+}
+.product-box input {
+    padding: 8px;
+    margin-right: 10px;
+    flex: 1;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: rgb(8, 13, 158);
+    box-shadow: 4px 4px 8px rgb(236, 82, 82);
+    text-align: center;
+    
+}
+.price{
+    color: black;
+}
+.product-box input[type="text"] {
+    width: 305px;
+}
+.total{
+    text-align: center;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-top: 20px;
+    padding: 5px;
+    border: 2px solid rgb(188, 154, 154);
+    box-shadow: 4px 4px 8px rgb(236, 82, 82);
+}
+.error {
+    color: red;
+    font-size: 1.5em;
+    margin-top: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+#product-container {
+    position: relative;
+}
