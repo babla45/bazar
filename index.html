@@ -10,7 +10,7 @@
 <body>
 
     <div class="heading">
-        <h2>Hi!!! I am Babla, welcome to<br>my Product Price Calculator</h2><br>
+        <h2>Hi!!! I am <span style="color: red; font-weight: bold;">Babla</span>, welcome to<br>my Product Price Calculator</h2><br>
     </div>
 
     <div id="product-container">
@@ -21,9 +21,9 @@
                 <button onclick="addProduct(this, 'below')">Add Below</button>
                 <button onclick="removeProduct(this)">Remove</button>
             </div>
-            <input type="text" class="description" autocomplete="off" placeholder="Product Description">
+            <input type="text" class="description" placeholder="Product Description">
             <span class="small-screen"></span>
-            <input type="text" class="price" autocomplete="off" placeholder="Price (e.g. 12+2*3)" oninput="calculateTotal()">
+            <input type="text" class="price" placeholder="Price (e.g. 12+2*3)" oninput="calculateTotal()">
         </div>
     </div>
     
