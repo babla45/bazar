@@ -39,15 +39,27 @@
     </div>
 
 <!-- --------------------------amount or price calculation----- -->
-
-    <!-- <u id="advanced-option2" style="cursor: pointer;">Show Advanced Option</u> -->
+    <br>
     <button id="advanced-option-button-id" onclick="toggleAdvancedOption()">Show advanced option</button>
 
     
-    <br><br>
+    <br><br><br><br>
+
+    
     <div id="advanced-option-node">
-        Price for one unit: <input type="number" id="price-for-one-unit" placeholder="Amount"><br><br>
-        Enter amount or price: <input type="number" id="amount-or-price" placeholder="Amount or price">
+        <div class="heading">
+            <h3>Instant Price & Weight Converter</h3><br>
+        </div>
+
+        <b>Price for one unit (kg):</b>
+        <span class="small-screen2"></span>
+        <input type="number" id="price-for-one-unit" placeholder="Amount"><br><br>
+        
+        <b>Enter amount or price:</b> 
+        <span class="small-screen2"></span>
+        <input type="number" id="amount-or-price" placeholder="Amount or price">
+        <span class="small-screen2"></span>
+
         <select id="unit">
             <option value="g">Grams (g)</option>
             <option value="tk">Price (Taka)</option>
@@ -55,12 +67,13 @@
         </select><br><br>
     
         <button id="calculate-button" onclick="calculateAmountOrPrice()">Calculate</button>
-        <button id="reset" onclick="resetValues()">reset values</button>
+        <button id="reset" onclick="resetValues()">Reset Values</button>
     
         <div class="result">
             <p id="result">Result will be shown here</p>
         </div>
     </div>
+    <br><br><br><br><br>
     
     
 

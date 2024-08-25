@@ -134,9 +134,52 @@ body {
     border: none;
     outline: none;
     text-decoration: underline;
-    
+    color: blue;
+    font-weight: bold;
+}
+#advanced-option-button-id:hover{
+    color: rgb(79, 4, 122);
 }
 
+#price-for-one-unit, #amount-or-price{
+    border-radius: 12px;
+    height: 20px;
+    padding: 3px;
+    text-align: center;
+    box-shadow: 2px 2px 4px rgb(140, 12, 12);
+}
+
+#calculate-button, #reset{
+    border-radius: 10px;
+    height: 30px;
+    background-color: rgb(245, 207, 161);
+    box-shadow: 2px 2px 4px rgb(140, 12, 12);
+}
+
+#unit{
+    border-radius: 10px;
+    height: 28px;
+    box-shadow: 2px 2px 4px rgb(140, 12, 12);
+} 
+
+#result{
+    box-shadow: 2px 2px 4px rgb(140, 12, 12);
+    color: #130528;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 20px;
+}
+b{
+    color: rgb(4, 4, 4);
+    border-radius: 6px;
+    margin-right: 5px;
+    padding: 3px;
+    box-shadow: 2px 2px 4px rgb(140, 12, 12);
+}
+.small-screen2{
+    display: inline;
+}
 
 /* Media query for max width 480px */
 @media (max-width: 480px) {
@@ -150,4 +193,10 @@ body {
     .small-screen{
         display: inline-block;
     }
+
+    .small-screen2 {
+        display: block;
+        margin-bottom: 8px;
+    }
+
 }

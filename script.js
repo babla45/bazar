@@ -260,5 +260,6 @@ function toggleAdvancedOption() {
 function resetValues() {
     document.getElementById("amount-or-price").value='';
     document.getElementById("price-for-one-unit").value='';
+    document.getElementById("result").textContent='Result will be shown here';
 }
 
