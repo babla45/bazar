@@ -126,7 +126,16 @@ body {
 }
 
 
+#advanced-option-node{
+    display: none;
+}
 
+#advanced-option-button-id{
+    border: none;
+    outline: none;
+    text-decoration: underline;
+    
+}
 
 
 /* Media query for max width 480px */

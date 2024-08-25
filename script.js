@@ -199,11 +199,66 @@ function downloadData() {
     // Clean up by revoking the object URL
     URL.revokeObjectURL(link.href);
 }
-
-
-
-
-
-
 // Initial index update
 updateIndexes();
+
+
+// --------------calculation based on price or amount---------------
+function calculateAmountOrPrice() {
+    // Get input values
+    const pricePerUnit = parseFloat(document.getElementById('price-for-one-unit').value);
+    const amountOrPrice = parseFloat(document.getElementById('amount-or-price').value);
+    const unit = document.getElementById('unit').value;
+
+    // Get the result paragraph
+    const resultElement = document.getElementById('result');
+
+    // Check if input is valid
+    if (isNaN(pricePerUnit) || isNaN(amountOrPrice)) {
+        resultElement.textContent = "Please enter valid numbers for both inputs.";
+        return;
+    }
+
+    let resultText = "";
+
+    if (unit === 'g') {
+        // Calculate the price for the given grams
+        const amountInKg = amountOrPrice / 1000; // Convert grams to kilograms
+        const price = amountInKg * pricePerUnit;
+        resultText = `Price for ${amountOrPrice} grams is: ${price.toFixed(2)} Taka.`;
+    } else if (unit === 'kg') {
+        // Calculate the price for the given kilograms
+        const price = amountOrPrice * pricePerUnit;
+        resultText = `Price for ${amountOrPrice} kg is: ${price.toFixed(2)} Taka.`;
+    } else if (unit === 'tk') {
+        // Calculate the amount of product for the given price
+        const amountInKg = amountOrPrice / pricePerUnit;
+        const amountInGrams = amountInKg * 1000;
+        resultText = `For ${amountOrPrice} Taka, you can buy: ${amountInKg.toFixed(2)} kg (${amountInGrams.toFixed(0)} grams).`;
+    }
+
+    // Display the result in the paragraph
+    resultElement.textContent = resultText;
+}
+
+
+// ------show or hide advanced optuion
+
+function toggleAdvancedOption() {
+    const advancedOptionNode = document.getElementById('advanced-option-node');
+    const toggleButton = document.getElementById('advanced-option-button-id');
+
+    if (advancedOptionNode.style.display === 'none' || advancedOptionNode.style.display === '') {
+        advancedOptionNode.style.display = 'block'; // Show the advanced options
+        toggleButton.textContent = 'Hide advanced option';
+    } else {
+        advancedOptionNode.style.display = 'none'; // Hide the advanced options
+        toggleButton.textContent = 'Show advanced option';
+    }
+}
+
+function resetValues() {
+    document.getElementById("amount-or-price").value='';
+    document.getElementById("price-for-one-unit").value='';
+}
+
