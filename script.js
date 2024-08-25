@@ -166,5 +166,44 @@ function resetForm() {
     }
 }
 
+
+
+
+// Function to download form data as a text file
+function downloadData() {
+    const productBoxes = document.querySelectorAll('.product-box');
+    let data = '';
+
+    // Gather all the product data into a string
+    productBoxes.forEach((box, index) => {
+        const description = box.querySelector('.description').value;
+        const price = box.querySelector('.price').value;
+        data += `Product ${index + 1}:\nDescription: ${description}\nPrice: ${price}\n\n`;
+    });
+
+    // Calculate and append the total price
+    const totalPrice = document.getElementById('totalPrice').textContent;
+    data += `**Total Price: $${totalPrice}**\n`;
+
+    // Create a blob with the data
+    const blob = new Blob([data], { type: 'text/plain' });
+
+    // Create a link element for the download
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'product-prices.txt';
+
+    // Simulate a click on the link to trigger the download
+    link.click();
+
+    // Clean up by revoking the object URL
+    URL.revokeObjectURL(link.href);
+}
+
+
+
+
+
+
 // Initial index update
 updateIndexes();

@@ -103,9 +103,10 @@ body {
 .reset-button-container {
     text-align: center;
 }
-.reset-button {
+.reset-button, .download-button {
     display: inline-block;
     margin-top: 20px;
+    margin-right: 1px;
     padding: 10px 20px;
     font-size: 1em;
     font-weight: bold;
@@ -118,6 +119,9 @@ body {
 }
 
 .reset-button:hover {
+    background-color: #0056b3;
+}
+.download-button:hover {
     background-color: #0056b3;
 }
 
