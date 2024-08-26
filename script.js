@@ -19,9 +19,9 @@ function addProduct(button, position) {
             <button onclick="addProduct(this, 'below')">Add Below</button>
             <button onclick="removeProduct(this)">Remove</button>
         </div>
-        <input type="text" class="description" placeholder="Product Description" oninput="saveProductData()">
+        <input type="text" class="description" placeholder="Enter Product Description" oninput="saveProductData()">
         <span class="small-screen"></span>
-        <input type="text" class="price" placeholder="Price (e.g. 12+2*3)" oninput="calculateTotal(); saveProductData();">
+        <input type="text" class="price" placeholder="Enter Price (e.g. 12+2*3)" oninput="calculateTotal(); saveProductData();">
     `;
 
     if (position === 'above') {
@@ -123,9 +123,9 @@ function loadProductData() {
                     <button onclick="addProduct(this, 'below')">Add Below</button>
                     <button onclick="removeProduct(this)">Remove</button>
                 </div>
-                <input type="text" class="description" placeholder="Product Description" value="${product.description}" oninput="saveProductData()">
+                <input type="text" class="description" placeholder="Enter Product Description" value="${product.description}" oninput="saveProductData()">
                 <span class="small-screen"></span>
-                <input type="text" class="price" placeholder="Price (e.g. 12+2*3)" value="${product.price}" oninput="calculateTotal(); saveProductData();">
+                <input type="text" class="price" placeholder="Enter Price (e.g. 12+2*3)" value="${product.price}" oninput="calculateTotal(); saveProductData();">
             `;
             container.appendChild(newBox);
         });
@@ -151,9 +151,9 @@ function resetForm() {
                     <button onclick="addProduct(this, 'below')">Add Below</button>
                     <button onclick="removeProduct(this)">Remove</button>
                 </div>
-                <input type="text" class="description" placeholder="Product Description" oninput="saveProductData()">
+                <input type="text" class="description" placeholder="Enter Product Description" oninput="saveProductData()">
                 <span class="small-screen"></span>
-                <input type="text" class="price" placeholder="Price (e.g. 12+2*3)" oninput="calculateTotal(); saveProductData();">
+                <input type="text" class="price" placeholder="Enter Price (e.g. 12+2*3)" oninput="calculateTotal(); saveProductData();">
             </div>
         `;
 

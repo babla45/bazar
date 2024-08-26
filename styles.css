@@ -139,7 +139,7 @@ body {
 }
 
 #tutorial{
-    color: #8908c5;
+    color: #28108a;
     font-weight: bold;
     font-style: italic;
     
@@ -193,7 +193,7 @@ b{
 }
 
 /* Media query for max width 480px */
-@media (max-width: 480px) {
+@media (max-width: 640px) {
     body {
         margin-left: 21px;
     }
