@@ -137,6 +137,17 @@ body {
     color: blue;
     font-weight: bold;
 }
+
+#tutorial{
+    color: #8908c5;
+    font-weight: bold;
+    font-style: italic;
+    
+}
+#tutorial:hover{
+    color: #0d9824;    
+}
+
 #advanced-option-button-id:hover{
     color: rgb(79, 4, 122);
 }
