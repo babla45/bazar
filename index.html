@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Price Calculator with Index and Styling</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="script.js"></script>
 </head>
 <body>
@@ -35,7 +36,7 @@
     <!-- Reset button -->
     <div class="reset-button-container">
         <button class="reset-button" onclick="resetForm()">Reset Calculator</button>
-        <button class="download-button" onclick="downloadData()">Download Data</button>
+        <button class="download-button" onclick="downloadDataTxt()">Download Data</button>
     </div>
 
 <!-- --------------------------amount or price calculation----- -->

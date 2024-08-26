@@ -169,21 +169,30 @@ function resetForm() {
 
 
 
-// Function to download form data as a text file
-function downloadData() {
+function downloadDataTxt() {
     const productBoxes = document.querySelectorAll('.product-box');
     let data = '';
 
-    // Gather all the product data into a string
+    // Add current date and time at the top
+    const currentDate = new Date().toLocaleString();
+    data += `Date and Time: ${currentDate}\n\n`;
+
+    // Gather all the product data into a formatted string
+    data += 'Product Description:                        Price:\n';
+    data += '---------------------------------------------------\n';
+
     productBoxes.forEach((box, index) => {
         const description = box.querySelector('.description').value;
         const price = box.querySelector('.price').value;
-        data += `Product ${index + 1}:\nDescription: ${description}\nPrice: ${price}\n\n`;
+        data += `${index + 1}. ${description.padEnd(40)} ${price} tk\n`;
+        data += '---------------------------------------------------\n';
     });
 
     // Calculate and append the total price
     const totalPrice = document.getElementById('totalPrice').textContent;
-    data += `**Total Price: $${totalPrice}**\n`;
+    data += '**************************************************\n';
+    data += `*             Total Price = ${totalPrice} tk            *\n`;
+    data += '**************************************************\n';
 
     // Create a blob with the data
     const blob = new Blob([data], { type: 'text/plain' });
@@ -199,6 +208,50 @@ function downloadData() {
     // Clean up by revoking the object URL
     URL.revokeObjectURL(link.href);
 }
+
+function downloadDataPdf() {
+    const productBoxes = document.querySelectorAll('.product-box');
+    
+    // Create a new jsPDF instance
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Add current date and time at the top
+    const currentDate = new Date().toLocaleString();
+    doc.text(`Date and Time: ${currentDate}`, 10, 10);
+
+    // Move to the next line
+    doc.text('\n', 10, 20);
+
+    // Add headers
+    doc.text('Product Description:                        Price:', 10, 30);
+    doc.text('---------------------------------------------------', 10, 35);
+
+    // Gather and format the product data
+    let yOffset = 45;
+    productBoxes.forEach((box, index) => {
+        const description = box.querySelector('.description').value;
+        const price = box.querySelector('.price').value;
+        doc.text(`${index + 1}. ${description.padEnd(40)} ${price} tk`, 10, yOffset);
+        yOffset += 10;
+        doc.text('---------------------------------------------------', 10, yOffset);
+        yOffset += 10;
+    });
+
+    // Calculate and append the total price
+    const totalPrice = document.getElementById('totalPrice').textContent;
+    yOffset += 10;
+    doc.text('**************************************************', 10, yOffset);
+    yOffset += 10;
+    doc.text(`*             Total Price = ${totalPrice} tk            *`, 10, yOffset);
+    yOffset += 10;
+    doc.text('**************************************************', 10, yOffset);
+
+    // Save the PDF with the filename 'product-prices.pdf'
+    doc.save('product-prices.pdf');
+}
+
+
 // Initial index update
 updateIndexes();
 
