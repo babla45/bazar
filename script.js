@@ -169,94 +169,6 @@ function resetForm() {
 
 
 
-function downloadDataTxt() {
-    const productBoxes = document.querySelectorAll('.product-box');
-    let data = '';
-
-    // Add current date and time at the top
-    const currentDate = new Date().toLocaleString();
-    data += `Date and Time: ${currentDate}\n\n`;
-
-    // Gather all the product data into a formatted string
-    data += 'Product Description:                        Price:\n';
-    data += '---------------------------------------------------\n';
-
-    productBoxes.forEach((box, index) => {
-        const description = box.querySelector('.description').value;
-        const price = box.querySelector('.price').value;
-        data += `${index + 1}. ${description.padEnd(40)} ${price} tk\n`;
-        data += '---------------------------------------------------\n';
-    });
-
-    // Calculate and append the total price
-    const totalPrice = document.getElementById('totalPrice').textContent;
-    data += '**************************************************\n';
-    data += `*             Total Price = ${totalPrice} tk            *\n`;
-    data += '**************************************************\n';
-
-    // Create a blob with the data
-    const blob = new Blob([data], { type: 'text/plain' });
-
-    // Create a link element for the download
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'product-prices.txt';
-
-    // Simulate a click on the link to trigger the download
-    link.click();
-
-    // Clean up by revoking the object URL
-    URL.revokeObjectURL(link.href);
-}
-
-function downloadDataPdf() {
-    const productBoxes = document.querySelectorAll('.product-box');
-    
-    // Create a new jsPDF instance
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-
-    // Add current date and time at the top
-    const currentDate = new Date().toLocaleString();
-    doc.text(`Date and Time: ${currentDate}`, 10, 10);
-
-    // Headers for the table
-    doc.text('Product Description:', 10, 30);
-    doc.text('Price:', 160, 30); // Align "Price:" header on the right
-
-    // Draw a separator line
-    doc.text('-------------------------------------------------------------------------------------', 10, 35);
-
-    // Position variables for dynamic content
-    let yOffset = 45;
-    
-    productBoxes.forEach((box, index) => {
-        const description = box.querySelector('.description').value;
-        const price = box.querySelector('.price').value;
-        
-        // Add product description and price
-        doc.text(`${index + 1}. ${description}`, 10, yOffset);
-        doc.text(`${price} tk`, 160, yOffset); // Align prices vertically
-        
-        // Move down for the next row
-        yOffset += 10;
-        doc.text('-------------------------------------------------------------------------------------', 10, yOffset);
-        yOffset += 10;
-    });
-
-    // Calculate and append the total price
-    const totalPrice = document.getElementById('totalPrice').textContent;
-    yOffset += 10;
-    doc.text('**************************************************', 10, yOffset);
-    yOffset += 10;
-    doc.text(`*             Total Price = ${totalPrice} tk            *`, 10, yOffset);
-    yOffset += 10;
-    doc.text('**************************************************', 10, yOffset);
-
-    // Save the PDF with the filename 'product-prices.pdf'
-    doc.save('product-prices.pdf');
-}
-
 
 
 // Initial index update
@@ -323,3 +235,166 @@ function resetValues() {
     document.getElementById("result").textContent='Result will be shown here';
 }
 
+
+
+
+function downloadDataTxt() {
+    if (!checkout()) {
+        return;
+    }
+    const productBoxes = document.querySelectorAll('.product-box');
+    let data = '';
+
+    // Add current date and time at the top
+    const currentDate = new Date().toLocaleString();
+    data += `Date and Time: ${currentDate}\n\n`;
+
+    // Gather all the product data into a formatted string
+    data += 'Product Description:                        Price:\n';
+    data += '---------------------------------------------------\n';
+
+    productBoxes.forEach((box, index) => {
+        const description = box.querySelector('.description').value;
+        const price = box.querySelector('.price').value;
+        data += `${index + 1}. ${description.padEnd(40)} ${price} tk\n`;
+        data += '---------------------------------------------------\n';
+    });
+
+    // Calculate and append the total price
+    const totalPrice = document.getElementById('totalPrice').textContent;
+    data += '**************************************************\n';
+    data += `*             Total Price = ${totalPrice} tk            *\n`;
+    data += '**************************************************\n';
+
+    // Create a blob with the data
+    const blob = new Blob([data], { type: 'text/plain' });
+
+    // Create a link element for the download
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'product-prices-by-babla.txt';
+
+    // Simulate a click on the link to trigger the download
+    link.click();
+
+    // Clean up by revoking the object URL
+    URL.revokeObjectURL(link.href);
+}
+
+
+
+function downloadDataPdf() {
+    if (!checkout()) {
+        return;
+    }
+    const { jsPDF } = window.jspdf;
+
+    // Initialize jsPDF
+    const doc = new jsPDF();
+
+    // Add the current date and time centered at the top
+    const now = new Date();
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const titleText = `Date: ${now.toLocaleDateString()} | Time: ${now.toLocaleTimeString()}`;
+    const titleX = (pageWidth - doc.getTextWidth(titleText)) / 2;
+    doc.text(titleText, titleX, 10);
+
+    // Get all product boxes
+    const products = document.querySelectorAll('.product-box');
+
+    // Prepare the table data and calculate the total price
+    let tableData = [];
+    let sumPrice = 0;
+    products.forEach((product, index) => {
+        const description = product.querySelector('.description').value.trim();
+        const priceText = product.querySelector('.price').value.trim();
+        let price = 0;
+
+        // If the description or price is empty, skip adding this row
+        if (description === "" && priceText === "") return;
+
+        // Evaluate the price expression only if it has a valid value
+        if (priceText) {
+            try {
+                price = eval(priceText.replace(/[^0-9+\-*/().]/g, '')) || 0;
+            } catch (e) {
+                console.error('Error evaluating price:', e);
+                price = 0; // If there's an error, set price to 0
+            }
+        }
+
+        sumPrice += price;
+        tableData.push([index + 1, description || 'N/A', price.toFixed(2)]);
+    });
+
+    // If no products are added, alert the user and exit
+    if (tableData.length === 0) {
+        alert("Please enter product descriptions and prices before downloading the PDF.");
+        return;
+    }
+
+    // Add the total price row to the table data
+    tableData.push(['', 'Total Price:', sumPrice.toFixed(2)]);
+
+    // Define column widths and total table width
+    const columnWidths = [20, 120, 40]; // Column widths in mm
+    const totalTableWidth = columnWidths.reduce((a, b) => a + b, 0); // Total width of all columns
+    const margin = 10; // Margin on the right side
+    const adjustedTableWidth = pageWidth - 2 * margin; // Adjusted table width including left and right margins
+
+    // Ensure table width is within page width minus margins
+    if (totalTableWidth > adjustedTableWidth) {
+        console.warn("Table width exceeds page width. Adjust column widths.");
+    }
+
+    // Add table header and body with borders
+    const startY = 20; // Adjust to ensure it doesn't overlap with the date
+    doc.autoTable({
+        startY: startY,
+        head: [['Index', 'Product Description', 'Price (tk)']],
+        body: tableData,
+        styles: { 
+            lineWidth: 0.8, // Set line width for internal borders
+            cellPadding: 3, 
+            fontStyle: 'bold' // Apply bold text to all cells
+        },
+        columnStyles: {
+            0: { cellWidth: columnWidths[0] }, 
+            1: { cellWidth: columnWidths[1] }, 
+            2: { cellWidth: columnWidths[2] }
+        },
+        tableLineColor: [0, 0, 0], // Black borders for internal lines
+        tableLineWidth: 0, // No outer border
+        margin: { left: margin, right: margin }, // Set left and right margins
+        willDrawCell: function (data) {
+            if (data.row.index === tableData.length - 1) {
+                data.cell.styles.fillColor = [200, 200, 200]; // Background color for the total price row
+                data.cell.styles.fontStyle = 'bold'; // Bold text for the total price row
+                
+                // Align "Total Price" to the right
+                if (data.column.index === 1) {
+                    data.cell.styles.halign = 'right'; // Align "Total Price" to the right
+                }
+
+            }
+        }
+    });
+
+    // Save the PDF
+    doc.save('Product_Price_Calculator_By_BABLA.pdf');
+}
+
+
+// Function to check if any input fields are empty
+function checkout() {
+    const productDescriptions = document.querySelectorAll('.description');
+    const productPrices = document.querySelectorAll('.price');
+    
+    for (let i = 0; i < productDescriptions.length; i++) {
+        if (productDescriptions[i].value.trim() === '' || productPrices[i].value.trim() === '') {
+            alert('Please fill in all product fields or remove empty entries');
+            return false;
+        }
+    }
+    return true;
+}

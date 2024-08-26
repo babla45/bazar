@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Price Calculator with Index and Styling</title>
     <link rel="stylesheet" href="styles.css">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+
     <script src="script.js"></script>
 </head>
 <body>
@@ -36,7 +39,8 @@
     <!-- Reset button and download button-->
     <div class="reset-button-container">
         <button class="reset-button" onclick="resetForm()">Reset Calculator</button>
-        <button class="download-button" onclick="downloadDataPdf()">Download Data</button>
+        <button class="download-button" onclick="downloadDataPdf()">Download Data (PDF)</button>
+        <button class="download-button" onclick="downloadDataTxt()">Download Data (txt)</button>
     </div>
 
 <!-- --------------------------amount or price calculation----- -->
@@ -76,9 +80,6 @@
     </div>
     <br><br><br><br><br>
     
-    
-
-
 
 </body>
 </html>
