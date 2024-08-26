@@ -220,21 +220,27 @@ function downloadDataPdf() {
     const currentDate = new Date().toLocaleString();
     doc.text(`Date and Time: ${currentDate}`, 10, 10);
 
-    // Move to the next line
-    doc.text('\n', 10, 20);
+    // Headers for the table
+    doc.text('Product Description:', 10, 30);
+    doc.text('Price:', 160, 30); // Align "Price:" header on the right
 
-    // Add headers
-    doc.text('Product Description:                        Price:', 10, 30);
-    doc.text('---------------------------------------------------', 10, 35);
+    // Draw a separator line
+    doc.text('-------------------------------------------------------------------------------------', 10, 35);
 
-    // Gather and format the product data
+    // Position variables for dynamic content
     let yOffset = 45;
+    
     productBoxes.forEach((box, index) => {
         const description = box.querySelector('.description').value;
         const price = box.querySelector('.price').value;
-        doc.text(`${index + 1}. ${description.padEnd(40)} ${price} tk`, 10, yOffset);
+        
+        // Add product description and price
+        doc.text(`${index + 1}. ${description}`, 10, yOffset);
+        doc.text(`${price} tk`, 160, yOffset); // Align prices vertically
+        
+        // Move down for the next row
         yOffset += 10;
-        doc.text('---------------------------------------------------', 10, yOffset);
+        doc.text('-------------------------------------------------------------------------------------', 10, yOffset);
         yOffset += 10;
     });
 
@@ -250,6 +256,7 @@ function downloadDataPdf() {
     // Save the PDF with the filename 'product-prices.pdf'
     doc.save('product-prices.pdf');
 }
+
 
 
 // Initial index update
